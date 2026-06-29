@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Law in Motion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #fafaf7;
+      --ink: #0c0c0c;
+      --ink-2: #1f1f1f;
+      --ink-3: #3a3a3a;
+      --muted: #6b6b6b;
+      --dim: #9a9a9a;
+      --rule: #e8e6e0;
+      --rule-strong: #c9c6c0;
+      --red: #8b1d1d;
+      --red-deep: #6e1414;
+
+      --serif: 'Newsreader', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      --sans:  'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--ink); }
+    body {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    button, input, textarea { font: inherit; color: inherit; background: transparent; }
+    button { cursor: pointer; border: none; }
+    a { color: inherit; text-decoration: none; }
+
+    .shell { width: min(1180px, 100%); margin: 0 auto; padding: 0 40px; }
+    .narrow { width: min(880px, 100%); margin: 0 auto; padding: 0 40px; }
+
+    /* ── MASTHEAD ──────────────────────────────────── */
+    .masthead {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .brand .red-bar {
+      width: 3px; height: 24px; background: var(--red);
+    }
+    .brand .mark {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 24px;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+    .brand .mark em { font-style: italic; color: var(--red); font-weight: 400; }
+    .powered {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      padding: 120px 0 90px;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(56px, 8.2vw, 112px);
+      line-height: 0.95;
+      letter-spacing: -0.028em;
+      color: var(--ink);
+      margin-bottom: 36px;
+      max-width: 18ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--red);
+    }
+    .hero .lede {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(18px, 1.6vw, 22px);
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 38em;
+      margin: 0 auto;
+    }
+
+    /* ── SEARCH ────────────────────────────────────── */
+    .search-section {
+      padding: 0 0 100px;
+    }
+    .search-frame {
+      max-width: 880px;
+      margin: 0 auto;
+      border: 1px solid var(--rule-strong);
+      background: var(--bg);
+      padding: 36px 44px 32px;
+      box-shadow: 0 1px 0 0 var(--rule-strong);
+    }
+    .search-frame > label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      outline: none;
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.5;
+      min-height: 140px;
+      resize: vertical;
+    }
+    textarea::placeholder { color: var(--dim); font-style: italic; }
+
+    .search-actions {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+    }
+    .primary {
+      background: var(--ink);
+      color: #fff;
+      padding: 17px 36px;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: background 0.18s ease;
+    }
+    .primary:hover { background: var(--red); }
+    .primary:disabled { background: var(--dim); cursor: not-allowed; }
+    .status {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .status.error { color: var(--red); }
+
+    /* ── HOW IT WORKS ──────────────────────────────── */
+    .how {
+      padding: 96px 0;
+      background: var(--bg-soft);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .how-step .num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 44px;
+      color: var(--red);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .how-step .step-body {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 1.25;
+      color: var(--ink);
+      letter-spacing: -0.012em;
+      margin-bottom: 12px;
+    }
+    .how-step .step-sub {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .how-label {
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 48px;
+    }
+    .how-label::before, .how-label::after {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--rule-strong);
+      vertical-align: middle;
+      margin: 0 16px;
+    }
+
+    /* ── STARTERS ──────────────────────────────────── */
+    .starters {
+      padding: 96px 0 120px;
+    }
+    .starters-head {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .starters-eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .starters-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(32px, 4vw, 48px);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+    .starters-title em { font-style: italic; }
+
+    .starter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 980px;
+      margin: 0 auto;
+      border-top: 1px solid var(--rule-strong);
+      border-bottom: 1px solid var(--rule-strong);
+    }
+    .starter {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 28px 32px;
+      border: none;
+      border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+      background: transparent;
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+      position: relative;
+    }
+    .starter::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.2s ease;
+    }
+    .starter:hover { background: var(--bg-soft); color: var(--ink); }
+    .starter:hover::before { transform: scaleY(1); }
+    .starter:nth-child(2n) { border-right: none; }
+    .starter:nth-last-child(-n+2) { border-bottom: none; }
+    .starter:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      border-right: none;
+    }
+
+    /* ── PIPELINE MODE (after first search) ──────── */
+    .how, .starters {
+      transition: opacity 0.28s ease, max-height 0.32s ease, padding 0.32s ease, border-color 0.28s ease;
+      overflow: hidden;
+      max-height: 1200px;
+    }
+    body.results-mode .how,
+    body.results-mode .starters {
+      opacity: 0;
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-color: transparent;
+      pointer-events: none;
+    }
+    .hero {
+      transition: padding 0.32s ease;
+    }
+    body.results-mode .hero { padding: 56px 0 36px; }
+    body.results-mode .hero h1 { font-size: clamp(36px, 4vw, 56px); }
+    body.results-mode .hero .lede { display: none; }
+
+    /* Loading shimmer right under the search frame */
+    .pipeline-bar {
+      max-width: 880px;
+      margin: -1px auto 0;
+      height: 2px;
+      background: var(--rule);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .pipeline-bar.active { opacity: 1; }
+    .pipeline-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -30%;
+      width: 30%; height: 100%;
+      background: var(--red);
+      animation: slide 1.2s ease-in-out infinite;
+    }
+    @keyframes slide {
+      0% { left: -30%; }
+      100% { left: 100%; }
+    }
+
+    /* Results section — when shown, tighter top spacing for pipeline feel */
+    body.results-mode .results-section {
+      padding-top: 36px;
+      border-top: none;
+    }
+    body.results-mode .search-section { padding-bottom: 0; }
+
+    .results-section {
+      animation: none;
+    }
+    body.results-mode .results-section { animation: reveal 0.4s ease both; }
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESULTS ───────────────────────────────────── */
+    .results-section {
+      padding: 80px 0 100px;
+      border-top: 1px solid var(--rule);
+    }
+    .results-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--rule-strong);
+      margin-bottom: 0;
+    }
+    .results-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .results-head h2 em { font-style: italic; color: var(--red); }
+    .results-count {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Featured top result */
+    .result-featured {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 36px;
+      padding: 56px 0;
+      border-bottom: 2px solid var(--ink);
+      align-items: start;
+    }
+    .result-featured .rank {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 28px;
+      color: var(--red);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      padding-top: 12px;
+    }
+    .result-featured .top-tag {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .result-featured h3 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4.4vw, 56px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+    .result-featured h3 em { font-style: italic; font-weight: 400; }
+    .result-featured .case-meta {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .result-featured .case-meta .citation { color: var(--red); font-weight: 600; }
+    .result-featured .snippet {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 60ch;
+      font-style: italic;
+      padding-left: 20px;
+      border-left: 2px solid var(--red);
+    }
+    .result-featured .open {
+      display: inline-block;
+      margin-top: 24px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 3px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .result-featured .open:hover { color: var(--red); border-color: var(--red); }
+
+    /* Subsequent results */
+    .result {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 36px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    .result .rank {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--dim);
+      padding-top: 6px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+    .result h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.018em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .result h3 em { font-style: italic; font-weight: 400; }
+    .result .case-meta {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .result .case-meta .citation { color: var(--red); font-weight: 600; }
+    .result .snippet {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--ink-3);
+      max-width: 72ch;
+    }
+    .result .open {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .result .open:hover { color: var(--red); border-color: var(--red); }
+
+    .empty, .error-msg {
+      padding: 96px 0;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--dim);
+      max-width: 42ch;
+      margin: 0 auto;
+    }
+    .error-msg { color: var(--red); font-style: normal; }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 56px 0 64px;
+    }
+    .foot {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .foot-brand {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .foot-brand em { font-style: italic; color: var(--red); font-weight: 400; }
+    .foot-brand .meta {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    .foot-note {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 50em;
+    }
+    .foot-note strong { color: var(--ink-2); font-weight: 500; }
+
+    @media (max-width: 880px) {
+      .shell, .narrow { padding: 0 24px; }
+      .hero { padding: 80px 0 64px; }
+      .search-frame { padding: 26px 24px 24px; }
+      .search-actions { flex-direction: column-reverse; gap: 16px; align-items: stretch; }
+      .how { padding: 64px 0; }
+      .how-grid { grid-template-columns: 1fr; gap: 40px; }
+      .starters { padding: 64px 0 80px; }
+      .starter-grid { grid-template-columns: 1fr; }
+      .starter { border-right: none !important; }
+      .starter:nth-last-child(-n+2):not(:last-child) { border-bottom: 1px solid var(--rule); }
+      .results-head { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .result-featured, .result { grid-template-columns: 36px 1fr; gap: 18px; }
+      .result-featured h3 { font-size: 32px; }
+      .result-featured .snippet { font-size: 17px; padding-left: 14px; }
+      .result h3 { font-size: 20px; }
+      .foot { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="shell masthead">
+  <div class="brand">
+    <div class="red-bar"></div>
+    <div class="mark">Law<em>in</em>Motion</div>
+  </div>
+  <div class="powered">Powered by ARBITER</div>
+</header>
+
+<section class="narrow hero">
+  <h1>Measure your matter <em>against case law.</em></h1>
+  <p class="lede">Describe a case, question, fact pattern, claim, defense, or document summary. ARBITER measures your request against candidate legal documents and ranks the opinions that cohere most closely.</p>
+</section>
+
+<section class="search-section">
+  <div class="shell">
+    <form id="searchForm">
+      <div class="search-frame">
+        <label for="query">Enter a legal question, case, fact pattern, or document summary</label>
+        <textarea id="query" spellcheck="true" placeholder="Describe a case, question, claim, defense, or document summary in your own words …"></textarea>
+        <div class="search-actions">
+          <span class="status" id="status">&nbsp;</span>
+          <button class="primary" type="submit">Measure against case law</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="pipeline-bar" id="pipelineBar"></div>
+</section>
+
+<section class="how" id="howSection">
+  <div class="shell">
+    <div class="how-label">How it works</div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="num">01.</div>
+        <div class="step-body">You write the facts.</div>
+        <div class="step-sub">Like you'd brief a memo — no keywords, no terms-of-art tricks.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">02.</div>
+        <div class="step-body">We read every opinion.</div>
+        <div class="step-sub">Federal and state. Not just the ones with matching words.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">03.</div>
+        <div class="step-body">You get the cases that fit.</div>
+        <div class="step-sub">Ranked by how closely the law in each one matches your situation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="starters" id="starters">
+  <div class="shell">
+    <div class="starters-head">
+      <div class="starters-eyebrow">Try a legal measurement</div>
+      <h2 class="starters-title">Pick a <em>starting point.</em></h2>
+    </div>
+    <div class="starter-grid">
+      <button class="starter" type="button">I have a case where a public employee says they were retaliated against after refusing to participate in conduct they believed was unlawful.</button>
+      <button class="starter" type="button">I am dealing with a contract dispute where the damages cap may fail because the weaker party had no real bargaining power.</button>
+      <button class="starter" type="button">Find cases like this one, but where the plaintiff lost.</button>
+      <button class="starter" type="button">Find cases where the court found the facts similar but distinguished the legal outcome.</button>
+      <button class="starter" type="button">I have a deposition summary. Find the cases whose reasoning most closely fits the witness's admissions.</button>
+    </div>
+  </div>
+</section>
+
+<section class="results-section shell" id="resultsWrap" hidden>
+  <div class="results-head">
+    <h2>Cases <em>on point.</em></h2>
+    <div class="results-count" id="resultsCount"></div>
+  </div>
+  <div id="results"></div>
+</section>
+
+<footer>
+  <div class="shell foot">
+    <div class="foot-brand">
+      Actual <em>General</em> Intelligence
+      <div class="meta">Opinions sourced from CourtListener</div>
+    </div>
+    <div class="foot-note">
+      <strong>CourtListener is the open demonstration corpus.</strong> Westlaw, internal briefs, contracts, depositions, and firm documents can become candidate corpora through licensed or private access.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sensible defaults — never shown to the user. Backend gets them every time.
+  const DEFAULTS = {
+    candidateLimit: 32,
+    returnLimit: 12,
+    jurisdiction: 'all',
+    dateFrom: '',
+    dateTo: '',
+    includeNoise: false,
+    fetchFullText: true,
+    arbiterUrl: 'https://recast-reviver-outlook.ngrok-free.dev/v1/compare'
+  };
+
+  const $ = (s) => document.querySelector(s);
+  const form = $('#searchForm');
+  const statusEl = $('#status');
+  const resultsEl = $('#results');
+  const resultsWrap = $('#resultsWrap');
+  const resultsCount = $('#resultsCount');
+  const pipelineBar = $('#pipelineBar');
+  const queryEl = $('#query');
+
+  function escapeHtml(v) {
+    return String(v || '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+  function formatCaseName(name) {
+    return escapeHtml(name).replace(/\s+v\.\s+/i, ' <em>v.</em> ');
+  }
+  function courtLine(item) {
+    const parts = [];
+    if (item.court) parts.push(escapeHtml(item.court));
+    if (item.dateFiled) parts.push(escapeHtml(item.dateFiled));
+    if (item.citation) parts.push(`<span class="citation">${escapeHtml(item.citation)}</span>`);
+    return parts.join(' &nbsp;·&nbsp; ');
+  }
+
+  function renderResults(payload) {
+    const ranked = payload.ranked || [];
+    resultsWrap.hidden = false;
+
+    if (!ranked.length) {
+      resultsCount.textContent = '';
+      resultsEl.innerHTML = `<div class="empty">${escapeHtml(payload.message || 'No cases returned. Try describing the situation differently.')}</div>`;
+      return;
+    }
+
+    resultsCount.textContent = `${ranked.length} ranked`;
+
+    const [top, ...rest] = ranked;
+    const topSnippet = (top.snippet || top.surface || '').slice(0, 800);
+    const restHtml = rest.map((item) => {
+      const snippet = (item.snippet || item.surface || '').slice(0, 600);
+      return `
+        <article class="result">
+          <div class="rank">${String(item.rank).padStart(2, '0')}</div>
+          <div>
+            <h3>${formatCaseName(item.title)}</h3>
+            <div class="case-meta">${courtLine(item)}</div>
+            <p class="snippet">${escapeHtml(snippet)}${snippet.length >= 600 ? '…' : ''}</p>
+            ${item.url ? `<a class="open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Read the opinion</a>` : ''}
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    resultsEl.innerHTML = `
+      <article class="result-featured">
+        <div class="rank">${String(top.rank).padStart(2, '0')}</div>
+        <div>
+          <div class="top-tag">Closest measurement</div>
+          <h3>${formatCaseName(top.title)}</h3>
+          <div class="case-meta">${courtLine(top)}</div>
+          <p class="snippet">${escapeHtml(topSnippet)}${topSnippet.length >= 800 ? '…' : ''}</p>
+          ${top.url ? `<a class="open" href="${escapeHtml(top.url)}" target="_blank" rel="noopener">Read the opinion</a>` : ''}
+        </div>
+      </article>
+      ${restHtml}
+    `;
+  }
+
+  async function runSearch() {
+    const query = queryEl.value.trim();
+    if (!query) return;
+
+    // Enter pipeline mode: collapse marketing chrome, anchor on search → results flow
+    document.body.classList.add('results-mode');
+    pipelineBar.classList.add('active');
+    statusEl.textContent = 'Measuring …';
+    statusEl.classList.remove('error');
+    $('button.primary').disabled = true;
+
+    resultsWrap.hidden = false;
+    resultsCount.textContent = '';
+    resultsEl.innerHTML = '<div class="empty">Measuring your request against candidate legal documents …</div>';
+
+    try {
+      const response = await fetch('/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, ...DEFAULTS })
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || `Request failed: ${response.status}`);
+      renderResults(payload);
+      statusEl.textContent = '';
+    } catch (error) {
+      resultsEl.innerHTML = `<div class="error-msg">${escapeHtml(error.message)}</div>`;
+      statusEl.textContent = 'Error';
+      statusEl.classList.add('error');
+    } finally {
+      $('button.primary').disabled = false;
+      pipelineBar.classList.remove('active');
+    }
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    runSearch();
+  });
+
+  // Presets fill the input only — never auto-trigger.
+  // Attorney stays in control of when measurement runs.
+  document.querySelectorAll('.starter').forEach((button) => {
+    button.addEventListener('click', () => {
+      queryEl.value = button.textContent.trim();
+      queryEl.focus();
+      // Move cursor to end so any edit picks up there
+      queryEl.setSelectionRange(queryEl.value.length, queryEl.value.length);
+      // Smoothly bring the search frame into view without yanking
+      document.querySelector('.search-frame').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+</script>
+</body>
+</html>
