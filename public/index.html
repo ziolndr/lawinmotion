@@ -44,15 +44,16 @@
 
     /* ── HERO WITH IMAGE ───────────────────────────── */
     .hero-stage {
-      min-height: 760px;
+      min-height: 690px;
       position: relative;
       overflow: hidden;
       background-image:
         linear-gradient(90deg, rgba(251,250,246,.96) 0%, rgba(251,250,246,.86) 31%, rgba(251,250,246,.42) 54%, rgba(251,250,246,.10) 100%),
         linear-gradient(180deg, rgba(251,250,246,.92) 0%, rgba(251,250,246,.20) 48%, rgba(12,12,12,.48) 100%),
         url('lawinmotion-hero.png');
-      background-size: cover;
-      background-position: center 18%;
+      background-size: auto, auto, 100% auto;
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: center center, center center, center top;
       border-bottom: 1px solid var(--rule-strong);
     }
     .hero-stage::after {
@@ -561,12 +562,12 @@
     }
     .foot-note strong { color: var(--ink-2); font-weight: 500; }
 
-    body.results-mode .hero-stage { min-height: 590px; }
+    body.results-mode .hero-stage { min-height: 540px; }
     body.results-mode .prompts { display: none; }
 
     @media (max-width: 900px) {
       .shell { padding: 0 22px; }
-      .hero-stage { min-height: auto; background-position: 56% 18%; }
+      .hero-stage { min-height: auto; background-size: auto, auto, 185% auto; background-repeat: no-repeat, no-repeat, no-repeat; background-position: center center, center center, 60% top; }
       .masthead { align-items: flex-start; gap: 18px; }
       .brand-row { gap: 18px; }
       .nav { display: none; }
