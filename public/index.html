@@ -44,7 +44,7 @@
 
     /* ── HERO WITH IMAGE ───────────────────────────── */
     .hero-stage {
-      min-height: 850px;
+      min-height: 760px;
       position: relative;
       overflow: hidden;
       background-image:
@@ -52,7 +52,7 @@
         linear-gradient(180deg, rgba(251,250,246,.92) 0%, rgba(251,250,246,.20) 48%, rgba(12,12,12,.48) 100%),
         url('lawinmotion-hero.png');
       background-size: cover;
-      background-position: center top;
+      background-position: center 18%;
       border-bottom: 1px solid var(--rule-strong);
     }
     .hero-stage::after {
@@ -561,12 +561,12 @@
     }
     .foot-note strong { color: var(--ink-2); font-weight: 500; }
 
-    body.results-mode .hero-stage { min-height: 650px; }
+    body.results-mode .hero-stage { min-height: 590px; }
     body.results-mode .prompts { display: none; }
 
     @media (max-width: 900px) {
       .shell { padding: 0 22px; }
-      .hero-stage { min-height: auto; background-position: 58% top; }
+      .hero-stage { min-height: auto; background-position: 56% 18%; }
       .masthead { align-items: flex-start; gap: 18px; }
       .brand-row { gap: 18px; }
       .nav { display: none; }
