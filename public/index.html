@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -618,7 +619,7 @@
         <div class="search-card">
           <label class="search-label" for="query">Describe your matter in natural language</label>
           <div class="input-panel">
-            <textarea id="query" spellcheck="true" placeholder="E.g., As defense counsel for a public agency, find cases where employee speech created operational disruption, loss of public trust, or mission conflict sufficient to defeat a retaliation claim…"></textarea>
+            <textarea id="query" spellcheck="true" placeholder="E.g., As defense counsel for a public agency, find cases where the employer won summary judgment because workplace disruption, coworker disharmony, loss of public trust, or interference with the agency mission outweighed the employee's free speech interest under the Pickering balancing test…"></textarea>
             <button class="primary" type="submit">Measure against case law</button>
           </div>
           <div class="search-utility">
@@ -641,24 +642,23 @@
     <div class="prompts-head">
       <div>
         <div class="eyebrow">Full example queries</div>
-        <h2>Use the whole request, not a <em>keyword chip.</em></h2>
+        <h2>Run the matter through a <em>legal perspective.</em></h2>
       </div>
-      <p class="prompts-copy">These are full legal requests, not topic tags. Start with the thing already on the desk: facts, an adverse case, a draft argument, a deposition excerpt, a client intake note, or a summary of the document.</p>
+      <p class="prompts-copy">These presets are full legal requests, not topic tags. The first group tests messy factual matter searches. The second group tests professional perspective shifts: judge, plaintiff, defense, regulator, and corporate defendant frames.</p>
     </div>
     <div class="prompt-grid">
       <div class="prompt-group">
-        <h3>Matter searches</h3>
-        <button class="starter fill-query" type="button">I have a case where a public employee says they were retaliated against after refusing to participate in conduct they believed was unlawful.</button>
-        <button class="starter fill-query" type="button">Find cases like this one, but where the plaintiff lost.</button>
-        <button class="starter fill-query" type="button">Opposing counsel is relying on an old case that sounds similar. Find authorities where the court found the facts similar but distinguished the legal outcome.</button>
-        <button class="starter fill-query" type="button">I have a deposition summary where the witness admits the policy existed but says it was not followed. Find cases where that kind of admission mattered at summary judgment.</button>
+        <h3>Factual matter searches</h3>
+        <button class="starter fill-query" type="button">Find section 1983 whistleblower actions where a public employee alleged retaliation after reporting internal misconduct, but the government employer won summary judgment because the employee’s speech was made pursuant to official job duties rather than as a private citizen.</button>
+        <button class="starter fill-query" type="button">Find intellectual property or commercial litigation cases where a court evaluated an identical physical artifact or parallel fact pattern to established precedent, but explicitly distinguished the legal outcome because the secondary use was transformative or legally differentiated.</button>
+        <button class="starter fill-query" type="button">Find cases concerning corporate liability or institutional negligence where an employee's deposition testimony or explicit admission that an internal safety rule or operational protocol was routinely violated successfully defeats a defendant's motion for summary judgment.</button>
       </div>
       <div class="prompt-group">
-        <h3>Perspective searches</h3>
-        <button class="starter fill-query" type="button">As a judge deciding summary judgment, show me cases that define the strict legal standard and the evidentiary threshold that controls the outcome.</button>
-        <button class="starter fill-query" type="button">As plaintiff's counsel in a civil rights action, find cases where qualified immunity was denied because the right was clearly established by local circuit precedent.</button>
-        <button class="starter fill-query" type="button">As defense counsel for a public agency, find cases where the employer won because workplace disruption, public trust, or agency mission outweighed the employee's speech interest.</button>
-        <button class="starter fill-query" type="button">As a federal regulator assessing corporate fraud, show me cases that enforce the outer limits of agency enforcement authority where the defendant challenged the fine as constitutionally excessive.</button>
+        <h3>Professional perspective searches</h3>
+        <button class="starter fill-query" type="button">As a Judge evaluating a motion for summary judgment on a non-compete clause, show me cases defining the strict statutory elements for reasonable geographic and temporal scope where a court refused to blue-pencil or rewrite an overbroad restriction.</button>
+        <button class="starter fill-query" type="button">As plaintiff's counsel in a section 1983 civil rights action, find cases where a public official or law enforcement officer was denied qualified immunity because the specific constitutional violation was already clearly established by controlling circuit court precedent.</button>
+        <button class="starter fill-query" type="button">As defense counsel for a public agency, find cases where the employer won summary judgment because workplace disruption, coworker disharmony, loss of public trust, or interference with the agency mission outweighed the employee's free speech interest under the Pickering balancing test.</button>
+        <button class="starter fill-query" type="button">As a Federal Regulator assessing corporate or financial fraud, show me cases enforcing the absolute limits of agency enforcement authority where a corporate defendant argued the civil penalty or regulatory fine violated the Eighth Amendment's Excessive Fines Clause.</button>
       </div>
     </div>
   </div>
