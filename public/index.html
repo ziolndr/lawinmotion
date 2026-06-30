@@ -227,36 +227,6 @@
     .tool-dot.clip::before { content: '⌁'; font-size: 16px; position: absolute; top: -4px; left: 0; transform: rotate(-35deg); }
     .tool-dot.mic::before { content: '◦'; font-size: 18px; position: absolute; top: -5px; left: 1px; }
 
-    .starter-strip {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 18px;
-      align-items: center;
-      border-top: 1px solid var(--rule);
-      margin-top: 18px;
-      padding-top: 18px;
-    }
-    .starter-label {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .starter-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .starter-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      border: 1px solid var(--rule-strong);
-      background: rgba(255,255,255,.55);
-      padding: 11px 15px;
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--ink-2);
-      transition: border-color .15s ease, background .15s ease, color .15s ease;
-    }
-    .starter-chip::after { content: '→'; color: var(--red); }
-    .starter-chip:hover { background: #fff; border-color: rgba(139,23,29,.42); color: var(--red); }
 
     .pipeline-bar {
       height: 2px;
@@ -615,9 +585,6 @@
       .search-card { padding: 16px; }
       .input-panel { grid-template-columns: 1fr; }
       .primary { width: 100%; min-width: 0; }
-      .starter-strip { grid-template-columns: 1fr; }
-      .starter-chips { flex-direction: column; }
-      .starter-chip { width: 100%; justify-content: space-between; }
       .prompts { padding: 56px 0 70px; }
       .prompts-head, .prompt-grid, .results-layout, .foot { grid-template-columns: 1fr; }
       .prompt-grid { gap: 20px; }
@@ -640,7 +607,7 @@
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#searchForm">Search</a>
-        <a href="#prompts">Prompts</a>
+        <a href="#prompts">Examples</a>
         <a href="#resultsWrap">Results</a>
       </nav>
     </div>
@@ -669,15 +636,6 @@
             </div>
             <span class="status" id="status">&nbsp;</span>
           </div>
-          <div class="starter-strip">
-            <div class="starter-label">Try a starter prompt</div>
-            <div class="starter-chips">
-              <button class="starter-chip fill-query" type="button">Qualified immunity denied at traffic stop</button>
-              <button class="starter-chip fill-query" type="button">Agency fine challenged as excessive</button>
-              <button class="starter-chip fill-query" type="button">Public employee speech disruption</button>
-              <button class="starter-chip fill-query" type="button">Similar facts, opposite outcome</button>
-            </div>
-          </div>
         </div>
       </form>
       <div class="pipeline-bar" id="pipelineBar"></div>
@@ -689,10 +647,10 @@
   <div class="shell">
     <div class="prompts-head">
       <div>
-        <div class="eyebrow">Starting points</div>
-        <h2>Start from the matter, or choose a <em>professional seat.</em></h2>
+        <div class="eyebrow">Full example queries</div>
+        <h2>Use the whole request, not a <em>keyword chip.</em></h2>
       </div>
-      <p class="prompts-copy">The search does not need lawyerly keyword packing. Use the thing already on the desk: facts, an adverse case, a draft argument, a deposition excerpt, a client intake note, or a summary of the document.</p>
+      <p class="prompts-copy">These are full legal requests, not topic tags. Start with the thing already on the desk: facts, an adverse case, a draft argument, a deposition excerpt, a client intake note, or a summary of the document.</p>
     </div>
     <div class="prompt-grid">
       <div class="prompt-group">
