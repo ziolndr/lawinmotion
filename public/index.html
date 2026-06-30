@@ -127,21 +127,27 @@
     .hero-copy h1 {
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(58px, 7.2vw, 104px);
-      line-height: .94;
-      letter-spacing: -0.042em;
+      font-size: clamp(54px, 6.4vw, 96px);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
       color: var(--ink);
-      max-width: 10.6ch;
-      margin-bottom: 28px;
+      max-width: 11ch;
+      margin-bottom: 30px;
+    }
+    .hero-copy h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--red);
     }
     .hero-copy h1 .dot { color: var(--red); }
     .hero-copy .lede {
-      font-family: var(--sans);
-      font-size: clamp(16px, 1.35vw, 19px);
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(18px, 1.45vw, 22px);
       line-height: 1.55;
       color: var(--ink-2);
-      max-width: 36em;
-      letter-spacing: -0.01em;
+      max-width: 34em;
+      letter-spacing: -0.004em;
     }
 
     .search-wrap {
@@ -582,7 +588,7 @@
       .nav { display: none; }
       .powered { font-size: 10px; }
       .hero-copy { padding-top: 52px; }
-      .hero-copy h1 { font-size: clamp(48px, 14vw, 72px); max-width: 9.8ch; }
+      .hero-copy h1 { font-size: clamp(46px, 13vw, 70px); max-width: 10.8ch; }
       .search-wrap { margin-top: 34px; padding-bottom: 42px; }
       .search-card { padding: 16px; }
       .input-panel { grid-template-columns: 1fr; }
@@ -618,7 +624,7 @@
 
   <div class="shell">
     <div class="hero-copy" id="top">
-      <h1>Measure your matter against case law<span class="dot">.</span></h1>
+      <h1>Measure your matter <em>against case law.</em></h1>
       <p class="lede">Describe a case, question, fact pattern, claim, defense, document summary, transcript excerpt, or professional perspective and get ranked authorities.</p>
     </div>
 
@@ -649,10 +655,10 @@
   <div class="shell">
     <div class="prompts-head">
       <div>
-        <div class="eyebrow">Full example queries</div>
-        <h2>Use the whole request, not a <em>keyword chip.</em></h2>
+        <div class="eyebrow">Example requests</div>
+        <h2>Start with the matter in front of you<span class="dot">.</span></h2>
       </div>
-      <p class="prompts-copy">These are full legal requests, not topic tags. Start with the thing already on the desk: facts, an adverse case, a draft argument, a deposition excerpt, a client intake note, or a summary of the document.</p>
+      <p class="prompts-copy">Paste the facts, an adverse case, a draft argument, a deposition excerpt, a client intake note, or a document summary. The request can include the legal perspective being tested.</p>
     </div>
     <div class="prompt-grid">
       <div class="prompt-group">
