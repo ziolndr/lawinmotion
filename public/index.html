@@ -9,23 +9,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-soft: #fafaf7;
-      --ink: #0c0c0c;
-      --ink-2: #1f1f1f;
-      --ink-3: #3a3a3a;
-      --muted: #6b6b6b;
-      --dim: #9a9a9a;
-      --rule: #e8e6e0;
-      --rule-strong: #c9c6c0;
-      --red: #8b1d1d;
-      --red-deep: #6e1414;
-
+      --bg: #fbfaf6;
+      --panel: rgba(255, 253, 248, 0.92);
+      --panel-solid: #fffdf8;
+      --ink: #0b0b0b;
+      --ink-2: #242424;
+      --ink-3: #44413d;
+      --muted: #716d66;
+      --dim: #9b958d;
+      --rule: rgba(33, 30, 26, 0.11);
+      --rule-strong: rgba(33, 30, 26, 0.20);
+      --red: #8b171d;
+      --red-deep: #671015;
+      --shadow: 0 24px 80px rgba(12, 10, 8, 0.15);
       --serif: 'Newsreader', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
-      --sans:  'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     html, body { background: var(--bg); color: var(--ink); }
     body {
       font-family: var(--sans);
@@ -38,250 +40,314 @@
     button { cursor: pointer; border: none; }
     a { color: inherit; text-decoration: none; }
 
-    .shell { width: min(1180px, 100%); margin: 0 auto; padding: 0 40px; }
-    .narrow { width: min(880px, 100%); margin: 0 auto; padding: 0 40px; }
+    .shell { width: min(1180px, 100%); margin: 0 auto; padding: 0 42px; }
 
-    /* ── MASTHEAD ──────────────────────────────────── */
+    /* ── HERO WITH IMAGE ───────────────────────────── */
+    .hero-stage {
+      min-height: 850px;
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(90deg, rgba(251,250,246,.96) 0%, rgba(251,250,246,.86) 31%, rgba(251,250,246,.42) 54%, rgba(251,250,246,.10) 100%),
+        linear-gradient(180deg, rgba(251,250,246,.92) 0%, rgba(251,250,246,.20) 48%, rgba(12,12,12,.48) 100%),
+        url('lawinmotion-hero.png');
+      background-size: cover;
+      background-position: center top;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+    .hero-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 24% 24%, rgba(255,255,255,.38), transparent 34%), linear-gradient(180deg, transparent 62%, rgba(8,8,8,.28) 100%);
+      mix-blend-mode: normal;
+    }
+
     .masthead {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 30px 0;
-      border-bottom: 1px solid var(--rule);
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 0 18px;
     }
-    .brand {
-      display: flex; align-items: center; gap: 16px;
+    .brand-row { display: flex; align-items: center; gap: 34px; min-width: 0; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .motion-mark { width: 34px; height: 19px; position: relative; display: inline-block; }
+    .motion-mark span {
+      position: absolute;
+      left: 0;
+      height: 2px;
+      background: var(--red);
+      transform: skewX(-22deg);
+      transform-origin: left center;
     }
-    .brand .red-bar {
-      width: 3px; height: 24px; background: var(--red);
-    }
-    .brand .mark {
+    .motion-mark span:nth-child(1) { top: 1px; width: 30px; }
+    .motion-mark span:nth-child(2) { top: 8px; width: 23px; }
+    .motion-mark span:nth-child(3) { top: 15px; width: 14px; }
+    .mark {
       font-family: var(--serif);
+      font-size: 28px;
       font-weight: 500;
-      font-size: 24px;
-      letter-spacing: -0.015em;
-      color: var(--ink);
+      letter-spacing: -0.018em;
+      line-height: 1;
+      white-space: nowrap;
     }
-    .brand .mark em { font-style: italic; color: var(--red); font-weight: 400; }
+    .nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-2);
+      font-weight: 500;
+    }
+    .nav a { opacity: .88; }
+    .nav a:hover { color: var(--red); }
     .powered {
       font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.24em;
+      font-size: 12px;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 500;
+      color: var(--ink-2);
+      font-weight: 600;
+      white-space: nowrap;
     }
+    .powered b { color: var(--red); letter-spacing: .27em; margin-left: 4px; }
 
-    /* ── HERO ──────────────────────────────────────── */
-    .hero {
-      padding: 120px 0 90px;
-      text-align: center;
+    .hero-copy {
       position: relative;
+      z-index: 2;
+      width: min(620px, 100%);
+      padding: 72px 0 0;
     }
-    .hero h1 {
+    .hero-copy h1 {
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(56px, 8.2vw, 112px);
-      line-height: 0.95;
-      letter-spacing: -0.028em;
+      font-size: clamp(58px, 7.2vw, 104px);
+      line-height: .94;
+      letter-spacing: -0.042em;
       color: var(--ink);
-      margin-bottom: 36px;
-      max-width: 18ch;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 10.6ch;
+      margin-bottom: 28px;
     }
-    .hero h1 em {
-      font-style: italic;
-      font-weight: 300;
-      color: var(--red);
-    }
-    .hero .lede {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(18px, 1.6vw, 22px);
+    .hero-copy h1 .dot { color: var(--red); }
+    .hero-copy .lede {
+      font-family: var(--sans);
+      font-size: clamp(16px, 1.35vw, 19px);
       line-height: 1.55;
       color: var(--ink-2);
-      max-width: 38em;
-      margin: 0 auto;
+      max-width: 36em;
+      letter-spacing: -0.01em;
     }
 
-    /* ── SEARCH ────────────────────────────────────── */
-    .search-section {
-      padding: 0 0 100px;
+    .search-wrap {
+      position: relative;
+      z-index: 3;
+      margin-top: 48px;
+      padding-bottom: 64px;
+      width: min(1060px, 100%);
     }
-    .search-frame {
-      max-width: 880px;
-      margin: 0 auto;
-      border: 1px solid var(--rule-strong);
-      background: var(--bg);
-      padding: 36px 44px 32px;
-      box-shadow: 0 1px 0 0 var(--rule-strong);
+    .search-card {
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.74);
+      box-shadow: var(--shadow);
+      padding: 20px 20px 18px;
     }
-    .search-frame > label {
+    .search-label {
       display: block;
       font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 12px;
       color: var(--muted);
-      font-weight: 600;
-      margin-bottom: 18px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .input-panel {
+      border: 1px solid var(--rule-strong);
+      background: rgba(255,255,255,.62);
+      min-height: 142px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      padding: 18px 18px 18px 20px;
     }
     textarea {
       width: 100%;
-      border: none;
-      background: transparent;
-      color: var(--ink);
-      outline: none;
-      font-family: var(--serif);
-      font-size: 21px;
-      font-weight: 400;
-      line-height: 1.5;
-      min-height: 140px;
+      min-height: 96px;
       resize: vertical;
+      border: none;
+      outline: none;
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: transparent;
     }
-    textarea::placeholder { color: var(--dim); font-style: italic; }
-
-    .search-actions {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid var(--rule);
-    }
+    textarea::placeholder { color: rgba(63, 58, 51, .62); }
     .primary {
-      background: var(--ink);
+      align-self: end;
+      background: var(--red);
       color: #fff;
-      padding: 17px 36px;
+      padding: 18px 28px;
+      min-width: 246px;
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-weight: 600;
-      transition: background 0.18s ease;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: background .18s ease, transform .18s ease;
     }
-    .primary:hover { background: var(--red); }
-    .primary:disabled { background: var(--dim); cursor: not-allowed; }
-    .status {
+    .primary::after { content: ' →'; font-size: 18px; vertical-align: -1px; padding-left: 10px; }
+    .primary:hover { background: var(--red-deep); transform: translateY(-1px); }
+    .primary:disabled { background: var(--dim); cursor: not-allowed; transform: none; }
+
+    .search-utility {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 14px 4px 0;
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--muted);
+      font-size: 12px;
+    }
+    .status {
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
     }
     .status.error { color: var(--red); }
+    .tools { display: flex; gap: 14px; align-items: center; }
+    .tool-dot { width: 14px; height: 14px; opacity: .65; display: inline-block; position: relative; }
+    .tool-dot.clip::before { content: '⌁'; font-size: 16px; position: absolute; top: -4px; left: 0; transform: rotate(-35deg); }
+    .tool-dot.mic::before { content: '◦'; font-size: 18px; position: absolute; top: -5px; left: 1px; }
 
-    /* ── HOW IT WORKS ──────────────────────────────── */
-    .how {
-      padding: 96px 0;
-      background: var(--bg-soft);
+    .starter-strip {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: center;
       border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
+      margin-top: 18px;
+      padding-top: 18px;
     }
-    .how-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 64px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .how-step .num {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: 44px;
-      color: var(--red);
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-    .how-step .step-body {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 1.25;
-      color: var(--ink);
-      letter-spacing: -0.012em;
-      margin-bottom: 12px;
-    }
-    .how-step .step-sub {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-style: italic;
-      font-size: 16px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-    .how-label {
-      text-align: center;
+    .starter-label {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
+      font-size: 12px;
       color: var(--muted);
-      font-weight: 600;
-      margin-bottom: 48px;
+      white-space: nowrap;
     }
-    .how-label::before, .how-label::after {
+    .starter-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .starter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--rule-strong);
+      background: rgba(255,255,255,.55);
+      padding: 11px 15px;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--ink-2);
+      transition: border-color .15s ease, background .15s ease, color .15s ease;
+    }
+    .starter-chip::after { content: '→'; color: var(--red); }
+    .starter-chip:hover { background: #fff; border-color: rgba(139,23,29,.42); color: var(--red); }
+
+    .pipeline-bar {
+      height: 2px;
+      background: rgba(139,23,29,.16);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity .18s ease;
+    }
+    .pipeline-bar.active { opacity: 1; }
+    .pipeline-bar::after {
       content: '';
-      display: inline-block;
-      width: 32px; height: 1px;
-      background: var(--rule-strong);
-      vertical-align: middle;
-      margin: 0 16px;
+      position: absolute;
+      top: 0; left: -34%;
+      width: 34%; height: 100%;
+      background: var(--red);
+      animation: slide 1.1s ease-in-out infinite;
     }
+    @keyframes slide { from { left: -34%; } to { left: 100%; } }
 
-    /* ── STARTERS ──────────────────────────────────── */
-    .starters {
-      padding: 96px 0 120px;
+    /* ── PROMPTS ───────────────────────────────────── */
+    .prompts {
+      padding: 82px 0 92px;
+      background: var(--bg);
     }
-    .starters-head {
-      text-align: center;
-      margin-bottom: 48px;
+    .prompts-head {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 46px;
+      align-items: end;
+      margin-bottom: 40px;
     }
-    .starters-eyebrow {
+    .eyebrow {
       font-family: var(--sans);
       font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
+      letter-spacing: .24em;
       color: var(--red);
-      font-weight: 600;
-      margin-bottom: 18px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 14px;
     }
-    .starters-title {
+    .prompts h2 {
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(32px, 4vw, 48px);
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      color: var(--ink);
+      letter-spacing: -0.035em;
+      line-height: 1;
+      font-size: clamp(38px, 4.8vw, 64px);
     }
-    .starters-title em { font-style: italic; }
-
-    .starter-grid {
+    .prompts h2 em { font-style: italic; color: var(--red); font-weight: 300; }
+    .prompts-copy {
+      font-family: var(--serif);
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--ink-3);
+      font-weight: 300;
+      max-width: 38em;
+    }
+    .prompt-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      max-width: 980px;
-      margin: 0 auto;
-      border-top: 1px solid var(--rule-strong);
-      border-bottom: 1px solid var(--rule-strong);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+    .prompt-group {
+      background: var(--panel-solid);
+      border: 1px solid var(--rule);
+      box-shadow: 0 14px 46px rgba(12,10,8,.035);
+    }
+    .prompt-group h3 {
+      padding: 24px 26px 18px;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 800;
     }
     .starter {
       display: block;
       width: 100%;
       text-align: left;
-      padding: 28px 32px;
-      border: none;
       border-bottom: 1px solid var(--rule);
-      border-right: 1px solid var(--rule);
-      background: transparent;
-      font-family: var(--serif);
-      font-size: 17px;
-      font-weight: 400;
-      font-style: italic;
-      line-height: 1.45;
-      color: var(--ink-2);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
+      padding: 24px 28px 25px 32px;
       position: relative;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.42;
+      font-style: italic;
+      color: var(--ink-2);
+      background: transparent;
+      transition: background .15s ease, color .15s ease;
     }
     .starter::before {
       content: '';
@@ -291,386 +357,388 @@
       background: var(--red);
       transform: scaleY(0);
       transform-origin: top;
-      transition: transform 0.2s ease;
+      transition: transform .18s ease;
     }
-    .starter:hover { background: var(--bg-soft); color: var(--ink); }
+    .starter:hover { background: #fff; color: var(--red-deep); }
     .starter:hover::before { transform: scaleY(1); }
-    .starter:nth-child(2n) { border-right: none; }
-    .starter:nth-last-child(-n+2) { border-bottom: none; }
-    .starter:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-      border-right: none;
-    }
-
-    /* ── PIPELINE MODE (after first search) ──────── */
-    .how, .starters {
-      transition: opacity 0.28s ease, max-height 0.32s ease, padding 0.32s ease, border-color 0.28s ease;
-      overflow: hidden;
-      max-height: 1200px;
-    }
-    body.results-mode .how,
-    body.results-mode .starters {
-      opacity: 0;
-      max-height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      border-color: transparent;
-      pointer-events: none;
-    }
-    .hero {
-      transition: padding 0.32s ease;
-    }
-    body.results-mode .hero { padding: 56px 0 36px; }
-    body.results-mode .hero h1 { font-size: clamp(36px, 4vw, 56px); }
-    body.results-mode .hero .lede { display: none; }
-
-    /* Loading shimmer right under the search frame */
-    .pipeline-bar {
-      max-width: 880px;
-      margin: -1px auto 0;
-      height: 2px;
-      background: var(--rule);
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .pipeline-bar.active { opacity: 1; }
-    .pipeline-bar::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -30%;
-      width: 30%; height: 100%;
-      background: var(--red);
-      animation: slide 1.2s ease-in-out infinite;
-    }
-    @keyframes slide {
-      0% { left: -30%; }
-      100% { left: 100%; }
-    }
-
-    /* Results section — when shown, tighter top spacing for pipeline feel */
-    body.results-mode .results-section {
-      padding-top: 36px;
-      border-top: none;
-    }
-    body.results-mode .search-section { padding-bottom: 0; }
-
-    .results-section {
-      animation: none;
-    }
-    body.results-mode .results-section { animation: reveal 0.4s ease both; }
-    @keyframes reveal {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .starter:last-child { border-bottom: none; }
 
     /* ── RESULTS ───────────────────────────────────── */
     .results-section {
-      padding: 80px 0 100px;
-      border-top: 1px solid var(--rule);
+      padding: 78px 0 96px;
+      background: linear-gradient(180deg, #fffdf8 0%, #fbfaf6 100%);
+      border-top: 1px solid var(--rule-strong);
+    }
+    .results-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, .72fr);
+      gap: 54px;
+      align-items: start;
     }
     .results-head {
-      display: flex; align-items: baseline; justify-content: space-between;
-      padding-bottom: 26px;
-      border-bottom: 1px solid var(--rule-strong);
-      margin-bottom: 0;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
     }
     .results-head h2 {
       font-family: var(--serif);
-      font-size: clamp(32px, 4vw, 44px);
+      font-size: clamp(34px, 3.4vw, 48px);
       font-weight: 400;
-      letter-spacing: -0.02em;
+      letter-spacing: -.03em;
+      line-height: 1;
     }
-    .results-head h2 em { font-style: italic; color: var(--red); }
     .results-count {
       font-family: var(--sans);
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
     }
-
-    /* Featured top result */
-    .result-featured {
+    .result-list {
+      border: 1px solid var(--rule);
+      background: var(--panel-solid);
+      box-shadow: 0 14px 54px rgba(12,10,8,.045);
+    }
+    .result-featured, .result {
       display: grid;
-      grid-template-columns: 60px 1fr;
-      gap: 36px;
-      padding: 56px 0;
-      border-bottom: 2px solid var(--ink);
-      align-items: start;
-    }
-    .result-featured .rank {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 28px;
-      color: var(--red);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.02em;
-      padding-top: 12px;
-    }
-    .result-featured .top-tag {
-      font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--red);
-      font-weight: 600;
-      margin-bottom: 14px;
-    }
-    .result-featured h3 {
-      font-family: var(--serif);
-      font-size: clamp(36px, 4.4vw, 56px);
-      font-weight: 500;
-      letter-spacing: -0.025em;
-      line-height: 1.05;
-      margin-bottom: 16px;
-      color: var(--ink);
-    }
-    .result-featured h3 em { font-style: italic; font-weight: 400; }
-    .result-featured .case-meta {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 28px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    .result-featured .case-meta .citation { color: var(--red); font-weight: 600; }
-    .result-featured .snippet {
-      font-family: var(--serif);
-      font-size: 19px;
-      font-weight: 300;
-      line-height: 1.6;
-      color: var(--ink-2);
-      max-width: 60ch;
-      font-style: italic;
-      padding-left: 20px;
-      border-left: 2px solid var(--red);
-    }
-    .result-featured .open {
-      display: inline-block;
-      margin-top: 24px;
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink);
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 3px;
-      transition: color 0.15s ease, border-color 0.15s ease;
-    }
-    .result-featured .open:hover { color: var(--red); border-color: var(--red); }
-
-    /* Subsequent results */
-    .result {
-      display: grid;
-      grid-template-columns: 60px 1fr;
-      gap: 36px;
-      padding: 30px 0;
+      grid-template-columns: 72px 1fr 86px;
+      gap: 20px;
+      padding: 28px 20px 27px 0;
       border-bottom: 1px solid var(--rule);
       align-items: start;
     }
-    .result .rank {
+    .result-featured { border-left: 5px solid var(--red); background: rgba(139,23,29,.025); }
+    .result:last-child { border-bottom: none; }
+    .rank {
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1;
+      color: var(--red);
+      text-align: center;
+      padding-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .result .rank { color: var(--ink); opacity: .86; }
+    .result-featured h3, .result h3 {
       font-family: var(--serif);
       font-size: 22px;
-      color: var(--dim);
-      padding-top: 6px;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.01em;
-    }
-    .result h3 {
-      font-family: var(--serif);
-      font-size: 24px;
       font-weight: 500;
-      letter-spacing: -0.018em;
-      line-height: 1.2;
-      margin-bottom: 8px;
-      color: var(--ink);
+      letter-spacing: -.018em;
+      line-height: 1.12;
+      margin-bottom: 7px;
     }
-    .result h3 em { font-style: italic; font-weight: 400; }
-    .result .case-meta {
+    .result-featured h3 em, .result h3 em { font-style: italic; font-weight: 400; }
+    .case-meta {
       font-family: var(--sans);
       font-size: 11px;
+      letter-spacing: .03em;
       color: var(--muted);
-      margin-bottom: 14px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      margin-bottom: 12px;
       font-weight: 500;
     }
-    .result .case-meta .citation { color: var(--red); font-weight: 600; }
-    .result .snippet {
-      font-family: var(--serif);
-      font-size: 16px;
-      font-weight: 300;
-      line-height: 1.6;
+    .case-meta .citation { color: var(--red); font-weight: 700; }
+    .snippet {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.48;
       color: var(--ink-3);
-      max-width: 72ch;
+      max-width: 62em;
     }
-    .result .open {
+    .score-box {
+      text-align: right;
+      font-family: var(--sans);
+      color: var(--red);
+      font-size: 20px;
+      font-weight: 700;
+      padding-top: 2px;
+      white-space: nowrap;
+    }
+    .score-box span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .score-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .score-line b { color: var(--red); }
+    .why-line {
+      margin-top: 12px;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.45;
+      font-style: italic;
+      color: var(--muted);
+    }
+    .open {
       display: inline-block;
       margin-top: 14px;
+      color: var(--red);
       font-family: var(--sans);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: .16em;
       text-transform: uppercase;
-      color: var(--ink);
-      border-bottom: 1px solid var(--ink);
+      font-weight: 800;
+      border-bottom: 1px solid rgba(139,23,29,.5);
       padding-bottom: 2px;
-      transition: color 0.15s ease, border-color 0.15s ease;
     }
-    .result .open:hover { color: var(--red); border-color: var(--red); }
-
+    .open:hover { color: var(--red-deep); border-color: var(--red-deep); }
     .empty, .error-msg {
-      padding: 96px 0;
+      padding: 68px 24px;
       text-align: center;
       font-family: var(--serif);
-      font-size: 20px;
+      font-size: 21px;
+      line-height: 1.45;
+      color: var(--muted);
       font-style: italic;
-      font-weight: 300;
-      color: var(--dim);
-      max-width: 42ch;
-      margin: 0 auto;
+      background: var(--panel-solid);
+      border: 1px solid var(--rule);
     }
     .error-msg { color: var(--red); font-style: normal; }
+    .matter-panel {
+      border-left: 1px solid var(--rule-strong);
+      padding-left: 32px;
+      min-height: 420px;
+    }
+    .matter-card {
+      position: sticky;
+      top: 24px;
+    }
+    .matter-card h3, .matter-card h4 {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .matter-card p {
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      margin-bottom: 34px;
+    }
+    .matter-meta {
+      border-top: 1px solid var(--rule);
+      padding-top: 26px;
+      margin-top: 26px;
+    }
+    .matter-meta div {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      margin-bottom: 28px;
+    }
+    .edit-matter {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border: 1px solid var(--rule-strong);
+      padding: 14px 16px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-2);
+      background: rgba(255,255,255,.45);
+    }
 
-    /* ── FOOTER ───────────────────────────────────── */
     footer {
       border-top: 1px solid var(--rule);
-      padding: 56px 0 64px;
+      padding: 44px 0 56px;
+      background: var(--bg);
     }
     .foot {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 48px;
+      gap: 42px;
       align-items: start;
     }
     .foot-brand {
       font-family: var(--serif);
-      font-size: 18px;
-      color: var(--ink);
+      font-size: 20px;
       font-weight: 500;
-      letter-spacing: -0.01em;
+      letter-spacing: -.015em;
     }
-    .foot-brand em { font-style: italic; color: var(--red); font-weight: 400; }
+    .foot-brand em { color: var(--red); font-style: italic; font-weight: 400; }
     .foot-brand .meta {
       font-family: var(--sans);
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.12em;
+      font-size: 10px;
+      letter-spacing: .16em;
       text-transform: uppercase;
+      color: var(--muted);
       margin-top: 10px;
-      font-weight: 500;
+      font-weight: 700;
     }
     .foot-note {
+      color: var(--muted);
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 300;
       line-height: 1.55;
-      color: var(--muted);
-      max-width: 50em;
+      max-width: 56em;
     }
     .foot-note strong { color: var(--ink-2); font-weight: 500; }
 
-    @media (max-width: 880px) {
-      .shell, .narrow { padding: 0 24px; }
-      .hero { padding: 80px 0 64px; }
-      .search-frame { padding: 26px 24px 24px; }
-      .search-actions { flex-direction: column-reverse; gap: 16px; align-items: stretch; }
-      .how { padding: 64px 0; }
-      .how-grid { grid-template-columns: 1fr; gap: 40px; }
-      .starters { padding: 64px 0 80px; }
-      .starter-grid { grid-template-columns: 1fr; }
-      .starter { border-right: none !important; }
-      .starter:nth-last-child(-n+2):not(:last-child) { border-bottom: 1px solid var(--rule); }
-      .results-head { flex-direction: column; gap: 10px; align-items: flex-start; }
-      .result-featured, .result { grid-template-columns: 36px 1fr; gap: 18px; }
-      .result-featured h3 { font-size: 32px; }
-      .result-featured .snippet { font-size: 17px; padding-left: 14px; }
-      .result h3 { font-size: 20px; }
-      .foot { grid-template-columns: 1fr; gap: 24px; }
+    body.results-mode .hero-stage { min-height: 650px; }
+    body.results-mode .prompts { display: none; }
+
+    @media (max-width: 900px) {
+      .shell { padding: 0 22px; }
+      .hero-stage { min-height: auto; background-position: 58% top; }
+      .masthead { align-items: flex-start; gap: 18px; }
+      .brand-row { gap: 18px; }
+      .nav { display: none; }
+      .powered { font-size: 10px; }
+      .hero-copy { padding-top: 52px; }
+      .hero-copy h1 { font-size: clamp(48px, 14vw, 72px); max-width: 9.8ch; }
+      .search-wrap { margin-top: 34px; padding-bottom: 42px; }
+      .search-card { padding: 16px; }
+      .input-panel { grid-template-columns: 1fr; }
+      .primary { width: 100%; min-width: 0; }
+      .starter-strip { grid-template-columns: 1fr; }
+      .starter-chips { flex-direction: column; }
+      .starter-chip { width: 100%; justify-content: space-between; }
+      .prompts { padding: 56px 0 70px; }
+      .prompts-head, .prompt-grid, .results-layout, .foot { grid-template-columns: 1fr; }
+      .prompt-grid { gap: 20px; }
+      .results-section { padding: 54px 0 72px; }
+      .results-head { flex-direction: column; align-items: flex-start; }
+      .result-featured, .result { grid-template-columns: 46px 1fr; padding-right: 16px; }
+      .score-box { grid-column: 2; text-align: left; font-size: 15px; }
+      .matter-panel { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 30px; }
     }
   </style>
 </head>
 <body>
 
-<header class="shell masthead">
-  <div class="brand">
-    <div class="red-bar"></div>
-    <div class="mark">Law<em>in</em>Motion</div>
-  </div>
-  <div class="powered">Powered by ARBITER</div>
-</header>
+<section class="hero-stage">
+  <header class="shell masthead">
+    <div class="brand-row">
+      <a class="brand" href="#top" aria-label="Law in Motion home">
+        <span class="motion-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="mark">Law in Motion</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#searchForm">Search</a>
+        <a href="#prompts">Prompts</a>
+        <a href="#resultsWrap">Results</a>
+      </nav>
+    </div>
+    <div class="powered">Powered by <b>ARBITER</b></div>
+  </header>
 
-<section class="narrow hero">
-  <h1>Measure your matter <em>against case law.</em></h1>
-  <p class="lede">Describe a case, question, fact pattern, claim, defense, or document summary. ARBITER measures your request against candidate legal documents and ranks the opinions that cohere most closely.</p>
-</section>
-
-<section class="search-section">
   <div class="shell">
-    <form id="searchForm">
-      <div class="search-frame">
-        <label for="query">Enter a legal question, case, fact pattern, or document summary</label>
-        <textarea id="query" spellcheck="true" placeholder="Describe a case, question, claim, defense, or document summary in your own words …"></textarea>
-        <div class="search-actions">
-          <span class="status" id="status">&nbsp;</span>
-          <button class="primary" type="submit">Measure against case law</button>
+    <div class="hero-copy" id="top">
+      <h1>Measure your matter against case law<span class="dot">.</span></h1>
+      <p class="lede">Describe a case, question, fact pattern, claim, defense, document summary, transcript excerpt, or professional perspective and get ranked authorities.</p>
+    </div>
+
+    <div class="search-wrap">
+      <form id="searchForm">
+        <div class="search-card">
+          <label class="search-label" for="query">Describe your matter in natural language</label>
+          <div class="input-panel">
+            <textarea id="query" spellcheck="true" placeholder="E.g., As defense counsel for a public agency, find cases where employee speech created operational disruption, loss of public trust, or mission conflict sufficient to defeat a retaliation claim…"></textarea>
+            <button class="primary" type="submit">Measure against case law</button>
+          </div>
+          <div class="search-utility">
+            <div class="tools" aria-hidden="true">
+              <span class="tool-dot clip"></span>
+              <span class="tool-dot mic"></span>
+              <span id="charCount">0/4000</span>
+            </div>
+            <span class="status" id="status">&nbsp;</span>
+          </div>
+          <div class="starter-strip">
+            <div class="starter-label">Try a starter prompt</div>
+            <div class="starter-chips">
+              <button class="starter-chip fill-query" type="button">Qualified immunity denied at traffic stop</button>
+              <button class="starter-chip fill-query" type="button">Agency fine challenged as excessive</button>
+              <button class="starter-chip fill-query" type="button">Public employee speech disruption</button>
+              <button class="starter-chip fill-query" type="button">Similar facts, opposite outcome</button>
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <div class="pipeline-bar" id="pipelineBar"></div>
+    </div>
   </div>
-  <div class="pipeline-bar" id="pipelineBar"></div>
 </section>
 
-<section class="how" id="howSection">
+<section class="prompts" id="prompts">
   <div class="shell">
-    <div class="how-label">How it works</div>
-    <div class="how-grid">
-      <div class="how-step">
-        <div class="num">01.</div>
-        <div class="step-body">You write the facts.</div>
-        <div class="step-sub">Like you'd brief a memo — no keywords, no terms-of-art tricks.</div>
+    <div class="prompts-head">
+      <div>
+        <div class="eyebrow">Starting points</div>
+        <h2>Start from the matter, or choose a <em>professional seat.</em></h2>
       </div>
-      <div class="how-step">
-        <div class="num">02.</div>
-        <div class="step-body">We read every opinion.</div>
-        <div class="step-sub">Federal and state. Not just the ones with matching words.</div>
+      <p class="prompts-copy">The search does not need lawyerly keyword packing. Use the thing already on the desk: facts, an adverse case, a draft argument, a deposition excerpt, a client intake note, or a summary of the document.</p>
+    </div>
+    <div class="prompt-grid">
+      <div class="prompt-group">
+        <h3>Matter searches</h3>
+        <button class="starter fill-query" type="button">I have a case where a public employee says they were retaliated against after refusing to participate in conduct they believed was unlawful.</button>
+        <button class="starter fill-query" type="button">Find cases like this one, but where the plaintiff lost.</button>
+        <button class="starter fill-query" type="button">Opposing counsel is relying on an old case that sounds similar. Find authorities where the court found the facts similar but distinguished the legal outcome.</button>
+        <button class="starter fill-query" type="button">I have a deposition summary where the witness admits the policy existed but says it was not followed. Find cases where that kind of admission mattered at summary judgment.</button>
       </div>
-      <div class="how-step">
-        <div class="num">03.</div>
-        <div class="step-body">You get the cases that fit.</div>
-        <div class="step-sub">Ranked by how closely the law in each one matches your situation.</div>
+      <div class="prompt-group">
+        <h3>Perspective searches</h3>
+        <button class="starter fill-query" type="button">As a judge deciding summary judgment, show me cases that define the strict legal standard and the evidentiary threshold that controls the outcome.</button>
+        <button class="starter fill-query" type="button">As plaintiff's counsel in a civil rights action, find cases where qualified immunity was denied because the right was clearly established by local circuit precedent.</button>
+        <button class="starter fill-query" type="button">As defense counsel for a public agency, find cases where the employer won because workplace disruption, public trust, or agency mission outweighed the employee's speech interest.</button>
+        <button class="starter fill-query" type="button">As a federal regulator assessing corporate fraud, show me cases that enforce the outer limits of agency enforcement authority where the defendant challenged the fine as constitutionally excessive.</button>
       </div>
     </div>
   </div>
 </section>
 
-<section class="starters" id="starters">
-  <div class="shell">
-    <div class="starters-head">
-      <div class="starters-eyebrow">Try a legal measurement</div>
-      <h2 class="starters-title">Pick a <em>starting point.</em></h2>
-    </div>
-    <div class="starter-grid">
-      <button class="starter" type="button">I have a case where a public employee says they were retaliated against after refusing to participate in conduct they believed was unlawful.</button>
-      <button class="starter" type="button">I am dealing with a contract dispute where the damages cap may fail because the weaker party had no real bargaining power.</button>
-      <button class="starter" type="button">Find cases like this one, but where the plaintiff lost.</button>
-      <button class="starter" type="button">Find cases where the court found the facts similar but distinguished the legal outcome.</button>
-      <button class="starter" type="button">I have a deposition summary. Find the cases whose reasoning most closely fits the witness's admissions.</button>
-    </div>
+<section class="results-section" id="resultsWrap" hidden>
+  <div class="shell results-layout">
+    <main>
+      <div class="results-head">
+        <div>
+          <div class="eyebrow">Ranked authorities</div>
+          <h2>Most relevant case law</h2>
+        </div>
+        <div class="results-count" id="resultsCount"></div>
+      </div>
+      <div id="results"></div>
+    </main>
+    <aside class="matter-panel">
+      <div class="matter-card">
+        <h3>Matter summary</h3>
+        <p id="matterSummary">Run a search to see the matter measured against candidate legal documents.</p>
+        <div class="matter-meta">
+          <h4>Corpus</h4>
+          <div>CourtListener opinions</div>
+          <h4>Mode</h4>
+          <div>Query against candidate authorities</div>
+        </div>
+        <button class="edit-matter" type="button" onclick="document.getElementById('query').focus(); document.getElementById('searchForm').scrollIntoView({behavior:'smooth', block:'center'});">Edit matter details <span>✎</span></button>
+      </div>
+    </aside>
   </div>
-</section>
-
-<section class="results-section shell" id="resultsWrap" hidden>
-  <div class="results-head">
-    <h2>Cases <em>on point.</em></h2>
-    <div class="results-count" id="resultsCount"></div>
-  </div>
-  <div id="results"></div>
 </section>
 
 <footer>
@@ -686,7 +754,6 @@
 </footer>
 
 <script>
-  // Sensible defaults — never shown to the user. Backend gets them every time.
   const DEFAULTS = {
     candidateLimit: 32,
     returnLimit: 12,
@@ -706,12 +773,14 @@
   const resultsCount = $('#resultsCount');
   const pipelineBar = $('#pipelineBar');
   const queryEl = $('#query');
+  const matterSummary = $('#matterSummary');
+  const charCount = $('#charCount');
 
   function escapeHtml(v) {
     return String(v || '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
   }
   function formatCaseName(name) {
-    return escapeHtml(name).replace(/\s+v\.\s+/i, ' <em>v.</em> ');
+    return escapeHtml(name || 'Untitled authority').replace(/\s+v\.\s+/i, ' <em>v.</em> ');
   }
   function courtLine(item) {
     const parts = [];
@@ -720,6 +789,31 @@
     if (item.citation) parts.push(`<span class="citation">${escapeHtml(item.citation)}</span>`);
     return parts.join(' &nbsp;·&nbsp; ');
   }
+  function formatScore(value) {
+    const n = Number(value);
+    return Number.isFinite(n) ? n.toFixed(3) : '';
+  }
+  function scoreLine(item) {
+    const parts = [];
+    const score = formatScore(item.score ?? item.coherence);
+    if (score) parts.push(`<span>Coherence <b>${score}</b></span>`);
+    if (item.surfaceKind) parts.push(`<span>${escapeHtml(item.surfaceKind)}</span>`);
+    if (item.fullTextAvailable) parts.push('<span>Full-text surface</span>');
+    return parts.length ? `<div class="score-line">${parts.join('<span>·</span>')}</div>` : '';
+  }
+  function scoreBox(item) {
+    const score = formatScore(item.score ?? item.coherence);
+    return score ? `<div class="score-box">${score}<span>Coherence</span></div>` : '<div></div>';
+  }
+  function updateMatterSummary(query) {
+    const clean = query.replace(/\s+/g, ' ').trim();
+    matterSummary.textContent = clean.length > 260 ? `${clean.slice(0, 260)}…` : clean;
+  }
+  function updateCharCount() {
+    charCount.textContent = `${queryEl.value.length}/4000`;
+  }
+  queryEl.addEventListener('input', updateCharCount);
+  updateCharCount();
 
   function renderResults(payload) {
     const ranked = payload.ranked || [];
@@ -727,54 +821,44 @@
 
     if (!ranked.length) {
       resultsCount.textContent = '';
-      resultsEl.innerHTML = `<div class="empty">${escapeHtml(payload.message || 'No cases returned. Try describing the situation differently.')}</div>`;
+      resultsEl.innerHTML = `<div class="empty">${escapeHtml(payload.message || 'No cases returned. Try describing the matter differently.')}</div>`;
       return;
     }
 
     resultsCount.textContent = `${ranked.length} ranked`;
 
-    const [top, ...rest] = ranked;
-    const topSnippet = (top.snippet || top.surface || '').slice(0, 800);
-    const restHtml = rest.map((item) => {
-      const snippet = (item.snippet || item.surface || '').slice(0, 600);
+    const rows = ranked.map((item, index) => {
+      const snippet = (item.snippet || item.surface || '').slice(0, index === 0 ? 760 : 520);
+      const cls = index === 0 ? 'result-featured' : 'result';
       return `
-        <article class="result">
-          <div class="rank">${String(item.rank).padStart(2, '0')}</div>
+        <article class="${cls}">
+          <div class="rank">${String(item.rank || index + 1).padStart(2, '0')}</div>
           <div>
             <h3>${formatCaseName(item.title)}</h3>
             <div class="case-meta">${courtLine(item)}</div>
-            <p class="snippet">${escapeHtml(snippet)}${snippet.length >= 600 ? '…' : ''}</p>
+            ${scoreLine(item)}
+            <p class="snippet">${escapeHtml(snippet)}${snippet.length >= (index === 0 ? 760 : 520) ? '…' : ''}</p>
+            ${item.whyMatched ? `<p class="why-line">${escapeHtml(item.whyMatched)}</p>` : ''}
             ${item.url ? `<a class="open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Read the opinion</a>` : ''}
           </div>
+          ${scoreBox(item)}
         </article>
       `;
     }).join('');
 
-    resultsEl.innerHTML = `
-      <article class="result-featured">
-        <div class="rank">${String(top.rank).padStart(2, '0')}</div>
-        <div>
-          <div class="top-tag">Closest measurement</div>
-          <h3>${formatCaseName(top.title)}</h3>
-          <div class="case-meta">${courtLine(top)}</div>
-          <p class="snippet">${escapeHtml(topSnippet)}${topSnippet.length >= 800 ? '…' : ''}</p>
-          ${top.url ? `<a class="open" href="${escapeHtml(top.url)}" target="_blank" rel="noopener">Read the opinion</a>` : ''}
-        </div>
-      </article>
-      ${restHtml}
-    `;
+    resultsEl.innerHTML = `<div class="result-list">${rows}</div>`;
   }
 
   async function runSearch() {
     const query = queryEl.value.trim();
     if (!query) return;
 
-    // Enter pipeline mode: collapse marketing chrome, anchor on search → results flow
     document.body.classList.add('results-mode');
     pipelineBar.classList.add('active');
-    statusEl.textContent = 'Measuring …';
+    statusEl.textContent = 'Measuring';
     statusEl.classList.remove('error');
-    $('button.primary').disabled = true;
+    $('.primary').disabled = true;
+    updateMatterSummary(query);
 
     resultsWrap.hidden = false;
     resultsCount.textContent = '';
@@ -790,12 +874,13 @@
       if (!response.ok) throw new Error(payload.error || `Request failed: ${response.status}`);
       renderResults(payload);
       statusEl.textContent = '';
+      resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (error) {
       resultsEl.innerHTML = `<div class="error-msg">${escapeHtml(error.message)}</div>`;
       statusEl.textContent = 'Error';
       statusEl.classList.add('error');
     } finally {
-      $('button.primary').disabled = false;
+      $('.primary').disabled = false;
       pipelineBar.classList.remove('active');
     }
   }
@@ -805,16 +890,13 @@
     runSearch();
   });
 
-  // Presets fill the input only — never auto-trigger.
-  // Attorney stays in control of when measurement runs.
-  document.querySelectorAll('.starter').forEach((button) => {
+  document.querySelectorAll('.fill-query').forEach((button) => {
     button.addEventListener('click', () => {
       queryEl.value = button.textContent.trim();
+      updateCharCount();
       queryEl.focus();
-      // Move cursor to end so any edit picks up there
       queryEl.setSelectionRange(queryEl.value.length, queryEl.value.length);
-      // Smoothly bring the search frame into view without yanking
-      document.querySelector('.search-frame').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
 </script>
